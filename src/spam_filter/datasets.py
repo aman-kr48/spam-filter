@@ -1,14 +1,13 @@
 import pandas as pd
-from spam_filter.config import DATA_PATH, SEPARATOR, COLUMN_NAMES
 
 
-def load_dataset():
+def load_dataset(data_path):
 
     df = pd.read_csv(
-        DATA_PATH,
-        delimiter=SEPARATOR,
+        data_path,
+        delimiter="\t",
         header=None,
-        names=COLUMN_NAMES
+        names=["label", "message"]
     )
 
     return df

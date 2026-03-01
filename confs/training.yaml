@@ -1,0 +1,10 @@
+dataset:
+  path: data/SMSSpamCollection
+
+split:
+  test_size: 0.2
+  random_state: 42
+  shuffle: true
+
+model:
+  max_iter: 1000
