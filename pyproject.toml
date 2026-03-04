@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "loguru>=0.7.3",
     "matplotlib>=3.10.8",
     "numpy>=2.4.2",
     "omegaconf>=2.3.0",
@@ -14,9 +15,44 @@ dependencies = [
 ]
 
 [dependency-groups]
+check = [
+    "bandit>=1.9.4",
+    "mypy>=1.19.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.15.4",
+]
 notebook = [
     "ipykernel>=7.2.0",
 ]
 
 [project.scripts]
 spam-filter = "spam_filter.scripts:main"
+
+
+[tool.mypy]
+
+pretty = true
+python_version = "3.14"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[tool.ruff]
+
+fix = true
+indent-width = 4
+line-length = 100
+target-version = "py314"
+
+[tool.pytest.ini_options]
+addopts = "--verbosity=2 --cov=src"
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["**/__main__.py"]
+
+[tool.bandit]
+targets = ["src"]
