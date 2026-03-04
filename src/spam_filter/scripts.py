@@ -1,33 +1,21 @@
 import argparse
-from loguru import logger
 import sys
 
-from spam_filter.training import train
-from spam_filter.config import parse_file
-from spam_filter.config import merge_configs
+from loguru import logger
 
+from spam_filter.config import merge_configs, parse_file
+from spam_filter.training import train
 
 
 def main(argv: list[str] | None = None) -> int:
 
     # Configure logger
     logger.remove()
-    logger.add(
-        sys.stderr,
-        level="INFO",
-        serialize=True
-    )
-        
+    logger.add(sys.stderr, level="INFO", serialize=True)
 
-    parser = argparse.ArgumentParser(
-        description="Train the spam filter model"
-    )
+    parser = argparse.ArgumentParser(description="Train the spam filter model")
 
-    parser.add_argument(
-        "files",
-        nargs="+",
-        help="Configuration files"
-    )
+    parser.add_argument("files", nargs="+", help="Configuration files")
 
     args = parser.parse_args(argv)
     configs = [parse_file(file) for file in args.files]
@@ -37,7 +25,6 @@ def main(argv: list[str] | None = None) -> int:
     config = merge_configs(configs)
 
     logger.debug("Final config: {}", config)
-
 
     model, X_test, y_test = train(config)
 

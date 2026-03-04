@@ -1,6 +1,7 @@
 import pandas as pd
-from spam_filter.cleaning import clean_dataset
 import pytest
+
+from spam_filter.cleaning import clean_dataset
 
 
 @pytest.mark.parametrize(
@@ -13,22 +14,16 @@ import pytest
 )
 def test_clean_dataset_converts_labels(labels, expected):
 
-    df = pd.DataFrame({
-        "label": labels,
-        "message": ["msg"] * len(labels)
-    })
+    df = pd.DataFrame({"label": labels, "message": ["msg"] * len(labels)})
 
     cleaned = clean_dataset(df)
 
     assert set(cleaned["label"]) == expected
 
-    
+
 def test_clean_dataset_removes_duplicates():
 
-    df = pd.DataFrame({
-        "label": ["ham", "ham"],
-        "message": ["hello", "hello"]
-    })
+    df = pd.DataFrame({"label": ["ham", "ham"], "message": ["hello", "hello"]})
 
     cleaned = clean_dataset(df)
 

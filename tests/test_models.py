@@ -1,5 +1,6 @@
-from spam_filter.models import create_model
 from sklearn.pipeline import Pipeline
+
+from spam_filter.models import create_model
 
 
 def test_create_model_returns_pipeline():

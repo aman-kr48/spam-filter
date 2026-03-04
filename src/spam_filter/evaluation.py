@@ -1,7 +1,8 @@
-from sklearn.metrics import classification_report
-from sklearn.pipeline import Pipeline
 import pandas as pd
 from loguru import logger
+from sklearn.metrics import classification_report
+from sklearn.pipeline import Pipeline
+
 
 def evaluate(model: Pipeline, X_test: pd.Series, y_test: pd.Series) -> str:
 

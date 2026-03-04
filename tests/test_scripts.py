@@ -1,4 +1,5 @@
 import omegaconf as oc
+
 from spam_filter.scripts import main
 
 
@@ -6,12 +7,7 @@ def test_main_runs_and_prints_output(tmp_path, capsys):
 
     data_file = tmp_path / "sms.txt"
 
-    data_file.write_text(
-        "ham\tHello\n"
-        "spam\tBuy now\n"
-        "ham\tHi there\n"
-        "spam\tCheap meds\n"
-    )
+    data_file.write_text("ham\tHello\nspam\tBuy now\nham\tHi there\nspam\tCheap meds\n")
 
     config_file = tmp_path / "config.yaml"
 

@@ -1,13 +1,12 @@
+import pandas as pd
+from loguru import logger
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-import pandas as pd
 
-from spam_filter.datasets import load_dataset
 from spam_filter.cleaning import clean_dataset
-from spam_filter.models import create_model
 from spam_filter.config import Config
-
-from loguru import logger
+from spam_filter.datasets import load_dataset
+from spam_filter.models import create_model
 
 
 def train(config: Config) -> tuple[Pipeline, pd.Series, pd.Series]:
@@ -35,11 +34,7 @@ def train(config: Config) -> tuple[Pipeline, pd.Series, pd.Series]:
     logger.info("Splitting dataset (test_size={})", test_size)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y,
-        test_size=test_size,
-        random_state=random_state,
-        stratify=y
+        X, y, test_size=test_size, random_state=random_state, stratify=y
     )
 
     logger.debug("Train samples: {}", len(X_train))
